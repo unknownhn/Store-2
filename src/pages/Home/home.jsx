@@ -8,15 +8,19 @@ import '../../App.css'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import Cotegory from '../../Component/Cotegory';
 import Sales from '../../Component/Sales';
-import { getProduct } from '../../api/home/home';
+import { getCotegory, getProduct } from '../../api/home/home';
 import { FreeMode } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { ModalPostTrue } from '../../reducers/home/home';
 import { closeModal } from '../../reducers/home/home';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Home = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const product = useSelector((store) => store.home.product);
 
@@ -32,6 +36,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getProduct())
+    dispatch(getCotegory());
   }, [dispatch])
 
   return (
@@ -106,7 +111,9 @@ const Home = () => {
                 product.map((e) => {
                   return (
                     <div className=" p-[10px]" >
-                      <SwiperSlide onClick={() => (dispatch(ModalPostTrue(e)), setModalElement({ e }))}  ><Sales e={e} id={e.id} img={`${import.meta.env.VITE_APP_FILES_URL}${e.image}`} btn={'-36%'} cost={e.price} prev={'4564c'} title={e.productName} color={e.color} /></SwiperSlide>
+                      <SwiperSlide onClick={() => (dispatch(ModalPostTrue(e)), setModalElement({ e }))}  >
+                        <Sales e={e} id={e.id} img={`${import.meta.env.VITE_APP_FILES_URL}${e.image}`} btn={'-36%'} cost={e.price} prev={'4564c'} title={e.productName} color={e.color} />
+                        </SwiperSlide>
                     </div>
                   )
                 })

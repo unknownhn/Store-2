@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCotegory, getCotegoryById } from '../../api/home/home';
+import { useNavigate } from 'react-router-dom';
 
 const Cotegory = () => {
   
-  const cotegory = useSelector((store) => store.home.cotegory);
-  const cotegoryById = useSelector((store) => store.home.cotegoryById);
-  console.log(cotegoryById);
+  const cotegory = useSelector(({home}) => home.cotegory);
+  const cotegoryById = useSelector(({home}) => home.cotegoryById);
+  const openPro = useSelector(({cotegory}) => cotegory.openPro);
+  
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [id, setId] = useState(null);
-  
 
   useEffect(() => {
     dispatch(getCotegory());
@@ -38,7 +40,7 @@ const Cotegory = () => {
         <div className="grid grid-cols-3 w-[95%] m-auto gap-[50px]">
        {cotegoryById?.subCategories?.map((el) => (
           <div key={el?.id}>
-            <h1 className=''>{el?.subCategoryName}</h1>
+            <button >{el?.subCategoryName}</button>
           </div>
         ))}
        </div>
