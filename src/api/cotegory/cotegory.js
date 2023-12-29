@@ -22,13 +22,34 @@ export const getSubCategory = createAsyncThunk(
       } catch (error) {}
     }
   );
+  
   export const addSubCategory = createAsyncThunk(
     "cotegory/addSubCategory",
-    async function (obj,{dispatch}) {
+    async function (id,{dispatch,getState}) {
+      const {text}=getState().cotegory
+      let newuser={
+        CategoryId:id,
+        SubCategoryName:text
+      }
       try {
-        const { data } = await axiosRequest.post(`SubCategory/add-sub-category?`,{CategoryId:obj.CategoryId,
-          SubCategoryName:obj.SubCategoryName});
+        const { data } = await axiosRequest.post(`SubCategory/add-sub-category?CategoryId=${id}&SubCategoryName=${newuser.SubCategoryName}`);
         dispatch(getSubCategory());
+      } catch (error) {}
+    }
+  );
+
+  export const editSubCategory = createAsyncThunk(
+    "cotegory/editSubCategory",
+    async function (id,{dispatch,getState}) {
+      const {text2}=getState().cotegory
+      const {idx}=getState().cotegory
+      let newuser={
+        Id:idx,
+        SubCategoryName:text2
+      }
+      try {
+        const { data } = await axiosRequest.put(`SubCategory/update-sub-category?Id=${newuser.Id}&CategoryId=${id}&SubCategoryName=${newuser.SubCategoryName}`);
+        dispatch(getSubCategory())
       } catch (error) {}
     }
   );

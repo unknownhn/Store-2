@@ -8,15 +8,16 @@ import Button from '@mui/material/Button';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSubCategory,delSubCategory,addSubCategory } from '../../api/cotegory/cotegory';
+import { getSubCategory,delSubCategory,addSubCategory, editSubCategory } from '../../api/cotegory/cotegory';
 import AddSubCat from '../../Component/AddSubCat';
 import TextField from '@mui/material/TextField';
-import { handleChange} from '../../reducers/cotegory/cotegory';
+import { handleChange, openEdit} from '../../reducers/cotegory/cotegory';
 import { getCotegory } from '../../api/home/home';
 
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
+ 
 
   return (
     <div
@@ -42,15 +43,20 @@ function a11yProps(index) {
   };
 }
 
+// Main function
 export default function BasicTabs() {
   const dispatch = useDispatch()
+  const [id,setId]=useState(null)
+  const [ide,setIde]=useState(null)
   const [value, setValue] = useState(0);
 
   const cotegory=useSelector(({cotegory})=>cotegory.category)
   const open=useSelector(({cotegory})=>cotegory.open)
   const text=useSelector(({cotegory})=>cotegory.text)
-  const catAdd=useSelector(({home})=>home.cotegory)
-// console.log(catAdd);
+  const text2=useSelector(({cotegory})=>cotegory.text2)
+  const idx=useSelector(({cotegory})=>cotegory.idx)
+  const openEditSub=useSelector(({cotegory})=>cotegory.openEditSub)
+
   const handleChangeMui = (event, newValue) => {
     setValue(newValue);
   };
@@ -85,6 +91,9 @@ export default function BasicTabs() {
       <CustomTabPanel value={value} index={2}>
         <Button variant="contained" sx={{marginX:"28px",}}
         onClick={()=>dispatch(handleChange({type:"open",value:true}))}>add +</Button>
+        <button onClick={()=>dispatch(openEdit())}>
+                <AutoFixHighOutlinedIcon/>
+              </button>
        <div className='flex flex-wrap justify-between'>
        {
         cotegory.map((e)=>{
@@ -94,9 +103,6 @@ export default function BasicTabs() {
              <div className='flex mt-[4px] gap-[20px] mx-[20px]'>
               <button onClick={()=>dispatch(delSubCategory(e.id))}>
                 <DeleteOutlineOutlinedIcon/>
-              </button>
-              <button>
-                <AutoFixHighOutlinedIcon/>
               </button>
              </div>
             </div>
@@ -108,18 +114,35 @@ export default function BasicTabs() {
        <AddSubCat open={open}>
        <Box>
         <h1 className='text-[30px]'>Add new SubCategory</h1><br />
-        <TextField placeholder='SubCategoryName ' value={text}
+        <TextField placeholder='SubCategoryId' value={id}
+         onChange={(e)=>setId(e.target.value)} />
+        <TextField placeholder='SubCategoryName' value={text}
          onChange={(e)=>dispatch(handleChange({type:"text",value:e.target.value}))} />
         <div className='mt-[20px]'>
-          <Button onClick={()=>dispatch(addSubCategory({
-            CategoryId:catAdd.id,
-            SubCategoryName:text
-          }))}>add</Button>
+          <Button onClick={()=>dispatch(addSubCategory(id))}>add</Button>
           <Button onClick={()=>dispatch(handleChange({type:"open",value:false}))}>close</Button>
         </div>
        </Box>
        </AddSubCat>
-      
+       {/* Modal edit */}
+       <AddSubCat open={openEditSub}>
+       <Box>
+        <h1 className='text-[30px]'>Edit SubCategory</h1><br />
+        <h2>Id</h2>
+        <TextField value={idx}
+         onChange={(e)=>dispatch(handleChange({type:"idx",value:e.target.value}))} /> <br />
+         <h2>CategoryId</h2>
+        <TextField value={ide}
+         onChange={(e)=>setIde(e.target.value)} /> <br />
+         <h2>SubCategoryName</h2>
+        <TextField value={text2}
+         onChange={(e)=>dispatch(handleChange({type:"text2",value:e.target.value}))}/>
+        <div className='mt-[20px]'> <br /><br />
+        <Button onClick={()=>dispatch(editSubCategory(ide))}>edit</Button>
+        <Button onClick={()=>dispatch(handleChange({type:"openEditSub",value:false}))}>close</Button>
+        </div>
+       </Box>
+       </AddSubCat>
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={3}>
