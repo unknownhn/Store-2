@@ -13,6 +13,7 @@ import AddSubCat from '../../Component/AddSubCat';
 import TextField from '@mui/material/TextField';
 import { handleChange, openEdit} from '../../reducers/cotegory/cotegory';
 import { getCotegory } from '../../api/home/home';
+import Category from '../../Component/Categoryfun/Category';
 
 
 function CustomTabPanel(props) {
@@ -85,7 +86,7 @@ export default function BasicTabs() {
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={1}>
-        Item One
+        <Category/>
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>

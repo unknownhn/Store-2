@@ -107,7 +107,7 @@ const Home = () => {
               modules={[FreeMode, Pagination]}
               className="mySwiper " x
             >
-              {
+              {/* {
                 product.map((e) => {
                   return (
                     <div className=" p-[10px]" >
@@ -117,7 +117,7 @@ const Home = () => {
                     </div>
                   )
                 })
-              }
+              } */}
 
 
             </Swiper>
