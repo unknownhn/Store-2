@@ -7,9 +7,11 @@ const cotegory = createSlice({
     initialState: {
         category: [],
         open: false,
+        openCategoryadd: false,
         openEditSub:false,
         text:"",
         text2:"",
+    
         idx:null,
     },
     reducers: {

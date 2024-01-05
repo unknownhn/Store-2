@@ -71,20 +71,18 @@ export default function BasicTabs() {
   return (
     <Box sx={{ width: '100%'}}>
       <div className='border-b-2 border-[divider]'>
-        <Tabs sx={{display:'flex'}} value={value} onChange={handleChangeMui} aria-label="basic tabs example">
-        <Tab label="Admin" {...a11yProps(0)} />
-          <Tab label="Item One" {...a11yProps(1)} />
-          <Tab label="Subcotegories" {...a11yProps(2)} />
-          <Tab label="Item Three" {...a11yProps(3)} />
-        
+        <Tabs sx={{display:'flex',width:"40%",margin:"auto"}} value={value} onChange={handleChangeMui} aria-label="basic tabs example">
+        <Tab label="Brend" {...a11yProps(0)} />
+          <Tab label="Categories" {...a11yProps(1)} />
+          <Tab label="Subcategories" {...a11yProps(2)} />
+          <Tab label="Product" {...a11yProps(3)} />
         </Tabs>
       </div>
       <Box>
-        
       <CustomTabPanel value={value} index={0}>
         admin
       </CustomTabPanel>
-
+      
       <CustomTabPanel value={value} index={1}>
         <Category/>
       </CustomTabPanel>
@@ -99,9 +97,10 @@ export default function BasicTabs() {
        {
         cotegory.map((e)=>{
           return (
-            <div key={e.id} className='w-[10%] m-[20px] text-center border-cyan-100 border-2 p-4'>
+            <div key={e.id} className='w-[12%] m-[20px] border-cyan-100 border-2 p-4'>
+              <p className='text-start'>Id:{e.id}</p>
+             <div className='flex mt-[4px] gap-[10px]'>
              <h1>{e.subCategoryName}</h1>
-             <div className='flex mt-[4px] gap-[20px] mx-[20px]'>
               <button onClick={()=>dispatch(delSubCategory(e.id))}>
                 <DeleteOutlineOutlinedIcon/>
               </button>
@@ -115,7 +114,7 @@ export default function BasicTabs() {
        <AddSubCat open={open}>
        <Box>
         <h1 className='text-[30px]'>Add new SubCategory</h1><br />
-        <TextField placeholder='SubCategoryId' value={id}
+        <TextField placeholder='CategoryId' value={id}
          onChange={(e)=>setId(e.target.value)} />
         <TextField placeholder='SubCategoryName' value={text}
          onChange={(e)=>dispatch(handleChange({type:"text",value:e.target.value}))} />

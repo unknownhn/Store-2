@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { axiosRequest } from "../../utils/axiosRequest";
+import { getCotegory } from "../home/home";
 
 
 export const getSubCategory = createAsyncThunk(
@@ -53,3 +54,15 @@ export const getSubCategory = createAsyncThunk(
       } catch (error) {}
     }
   );
+
+  ///////////////Categories //////////////////////////////////
+  export const delCategory = createAsyncThunk(
+    "cotegory/delCategory",
+    async function (id,{dispatch}) {
+      try {
+        const { data } = await axiosRequest.delete(`Category/delete-category?id=${id}`);
+        dispatch(getCotegory());
+      } catch (error) {}
+    }
+  );
+  
