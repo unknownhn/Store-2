@@ -55,7 +55,35 @@ export const getSubCategory = createAsyncThunk(
     }
   );
 
-  ///////////////Categories //////////////////////////////////
+  //=>////////////////////////////Categories
+  export const addCategory = createAsyncThunk(
+    "cotegory/addCategory",
+    async function (form,{dispatch}) {
+      try {
+        const { data } = await axiosRequest.post(`/Category/add-category`,form,{
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          },
+      });
+        dispatch(getCotegory());
+      } catch (error) {}
+    }
+  );
+
+  export const editCategory = createAsyncThunk(
+    "cotegory/editCategory",
+    async function (form,{dispatch}) {
+      try {
+        const { data } = await axiosRequest.put(`/Category/update-category`,form,{
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          },
+      });
+        dispatch(getCotegory());
+      } catch (error) {}
+    }
+  );
+
   export const delCategory = createAsyncThunk(
     "cotegory/delCategory",
     async function (id,{dispatch}) {
@@ -66,3 +94,16 @@ export const getSubCategory = createAsyncThunk(
     }
   );
   
+ //=>//////////////////////Brands
+  export const getBrand = createAsyncThunk(
+    "cotegory/getBrand",
+    async function () {
+      try {
+        const { data } = await axiosRequest.get("Brand/get-brands");
+        return data.data;
+      } catch (error) {}
+    }
+  );
+
+//=>//////////////////////Product
+ 

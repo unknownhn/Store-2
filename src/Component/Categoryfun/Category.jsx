@@ -6,7 +6,7 @@ import { getCotegory } from '../../api/home/home';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { Button } from '@mui/material';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
-import { delCategory } from '../../api/cotegory/cotegory';
+import { addCategory, delCategory, editCategory } from '../../api/cotegory/cotegory';
 import Box from '@mui/material/Box';
 import AddSubCat from '../../Component/AddSubCat';
 import TextField from '@mui/material/TextField';
@@ -17,6 +17,46 @@ const Category = () => {
   
     const cotegory=useSelector(({home})=>home.cotegory)
     const openCategoryadd=useSelector(({cotegory})=>cotegory.openCategoryadd)
+    const openCategoryedit=useSelector(({cotegory})=>cotegory.openCategoryedit)
+    const text=useSelector(({cotegory})=>cotegory.text)
+    const idx=useSelector(({cotegory})=>cotegory.idx)
+    const catName=useSelector(({cotegory})=>cotegory.catName)
+
+    const [img,setImg]=useState(null)
+    const [img2,setImg2]=useState(null)
+
+   const handelChangeImg=async(e)=>{
+        setImg(e.target.files[0])
+    }
+    const handelChangeImg2=async(e)=>{
+      setImg2(e.target.files[0])
+  }
+
+    const handleSubmit = () => {
+      if (img && text) {
+        const form = new FormData();
+        form.append("CategoryImage", img);
+        form.append("CategoryName", text);
+  
+        dispatch(addCategory(form));
+      } else {
+        console.error("Image and text are required for adding a category");
+      }
+    }
+
+    const handleSubmitedit = () => {
+      if (img2 && catName && idx) {
+        const form = new FormData();
+        form.append("Id", idx);
+        form.append("CategoryImage", img2);
+        form.append("CategoryName", catName);
+
+        dispatch(editCategory(form));
+      } else {
+        console.error("Image and text are required for adding a category");
+      }
+    }
+  
   
     useEffect(() => {
       dispatch(getCotegory());
@@ -25,8 +65,8 @@ const Category = () => {
   return (
     <div>
         <div className='flex gap-[20px] mx-[20px]'>
-        <Button variant="contained" onClick={()=>dispatch(handleChange({type:"openCategoryadd",value:true}))}>add +</Button>
-        <button><AutoFixHighOutlinedIcon/></button>
+       <Button variant="contained" onClick={()=>dispatch(handleChange({type:"openCategoryadd",value:true}))}>add +</Button>
+        <button onClick={()=>dispatch(handleChange({type:"openCategoryedit",value:true}))}><AutoFixHighOutlinedIcon/></button>
         </div>
         <div className='flex flex-wrap justify-between'>
       {
@@ -48,16 +88,37 @@ const Category = () => {
       <AddSubCat open={openCategoryadd}>
        <Box>
         <h1 className='text-[30px]'>Add new Category</h1><br />
-        {/* <TextField placeholder='CategoryId' value={id}
-         onChange={(e)=>setId(e.target.value)} />
+        <TextField type='file'
+         onChange={handelChangeImg} />
         <TextField placeholder='SubCategoryName' value={text}
-         onChange={(e)=>dispatch(handleChange({type:"text",value:e.target.value}))} /> */}
+         onChange={(e)=>dispatch(handleChange({type:"text",value:e.target.value}))} />
         <div className='mt-[20px]'>
-          {/* <Button onClick={()=>dispatch(addSubCategory(id))}>add</Button> */}
+          <Button onClick={handleSubmit}>add</Button>
           <Button onClick={()=>dispatch(handleChange({type:"openCategoryadd",value:false}))}>close</Button>
         </div>
        </Box>
       </AddSubCat>
+
+        {/* edit dialog */}
+      <AddSubCat open={openCategoryedit}>
+       <Box>
+        <h1 className='text-[30px]'>Edit Category</h1><br />
+         <legend>Id</legend>
+        <TextField value={idx} className='w-[100%]'
+        onChange={(e)=>dispatch(handleChange({type:"idx",value:e.target.value}))}/> <br />
+         <legend>CotegoryName</legend>
+        <TextField value={catName} className='w-[100%]'
+        onChange={(e)=>dispatch(handleChange({type:"catName",value:e.target.value}))}/> <br />
+         <legend>Img</legend>
+        <TextField type='file'
+         onChange={handelChangeImg2} />
+        <div className='mt-[20px]'>
+          <Button onClick={handleSubmitedit}>edit</Button>
+          <Button onClick={()=>dispatch(handleChange({type:"openCategoryedit",value:false}))}>close</Button>
+        </div>
+       </Box>
+      </AddSubCat>
+
     </div>
     </div>
   )
