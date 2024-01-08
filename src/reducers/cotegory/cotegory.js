@@ -4,7 +4,7 @@ import { getProduct } from "../../api/home/home";
 
 
 const cotegory = createSlice({
-    name: 'cotegory',
+    name:'cotegory',
     initialState: {
         category: [],
         brands: [],

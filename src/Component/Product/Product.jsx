@@ -7,7 +7,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import { Button } from '@mui/material';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import Box from '@mui/material/Box';
-import AddSubCat from '../../Component/AddSubCat';
+import ModalComp from '../ModalComp';
 import TextField from '@mui/material/TextField';
 
 
@@ -19,6 +19,7 @@ const Product = () => {
     useEffect(() => {
         dispatch(getProduct());
       }, [dispatch])
+
   return (
     <div>
           <div>

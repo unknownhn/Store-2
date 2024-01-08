@@ -9,13 +9,14 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSubCategory,delSubCategory,addSubCategory, editSubCategory } from '../../api/cotegory/cotegory';
-import AddSubCat from '../../Component/AddSubCat';
+import ModalComp from '../../Component/ModalComp';
 import TextField from '@mui/material/TextField';
 import { handleChange, openEdit} from '../../reducers/cotegory/cotegory';
 import { getCotegory } from '../../api/home/home';
 import Category from '../../Component/Categoryfun/Category';
 import Brand from '../../Component/Brand/Brand';
 import Product from '../../Component/Product/Product';
+import ModalComp from '../../Component/ModalComp';
 
 
 function CustomTabPanel(props) {
@@ -113,7 +114,7 @@ export default function BasicTabs() {
         }
        </div>
        {/* modal add */}
-       <AddSubCat open={open}>
+       <ModalComp open={open}>
        <Box>
         <h1 className='text-[30px]'>Add new SubCategory</h1><br />
         <TextField placeholder='CategoryId' value={id}
@@ -125,9 +126,9 @@ export default function BasicTabs() {
           <Button onClick={()=>dispatch(handleChange({type:"open",value:false}))}>close</Button>
         </div>
        </Box>
-       </AddSubCat>
+       </ModalComp>
        {/* Modal edit */}
-       <AddSubCat open={openEditSub}>
+       <ModalComp open={openEditSub}>
        <Box>
         <h1 className='text-[30px]'>Edit SubCategory</h1><br />
         <h2>Id</h2>
@@ -144,7 +145,7 @@ export default function BasicTabs() {
         <Button onClick={()=>dispatch(handleChange({type:"openEditSub",value:false}))}>close</Button>
         </div>
        </Box>
-       </AddSubCat>
+       </ModalComp>
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={3}>

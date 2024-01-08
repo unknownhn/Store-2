@@ -8,7 +8,7 @@ import { Button } from '@mui/material';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import { addCategory, delCategory, editCategory } from '../../api/cotegory/cotegory';
 import Box from '@mui/material/Box';
-import AddSubCat from '../../Component/AddSubCat';
+import ModalComp from '../ModalComp';
 import TextField from '@mui/material/TextField';
 
 const Category = () => {
@@ -85,7 +85,7 @@ const Category = () => {
        })
       }
 
-      <AddSubCat open={openCategoryadd}>
+      <ModalComp open={openCategoryadd}>
        <Box>
         <h1 className='text-[30px]'>Add new Category</h1><br />
         <TextField type='file'
@@ -97,10 +97,10 @@ const Category = () => {
           <Button onClick={()=>dispatch(handleChange({type:"openCategoryadd",value:false}))}>close</Button>
         </div>
        </Box>
-      </AddSubCat>
+      </ModalComp>
 
         {/* edit dialog */}
-      <AddSubCat open={openCategoryedit}>
+      <ModalComp open={openCategoryedit}>
        <Box>
         <h1 className='text-[30px]'>Edit Category</h1><br />
          <legend>Id</legend>
@@ -117,7 +117,7 @@ const Category = () => {
           <Button onClick={()=>dispatch(handleChange({type:"openCategoryedit",value:false}))}>close</Button>
         </div>
        </Box>
-      </AddSubCat>
+      </ModalComp>
 
     </div>
     </div>

@@ -6,9 +6,9 @@ import { handleChange } from '../../reducers/cotegory/cotegory';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import Box from '@mui/material/Box';
-import AddSubCat from '../AddSubCat';
 import TextField from '@mui/material/TextField';
 import { getBrand } from '../../api/cotegory/cotegory';
+import ModalComp from '../ModalComp';
 
 const Brand = () => {
 
