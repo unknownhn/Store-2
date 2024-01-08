@@ -16,7 +16,6 @@ import { getCotegory } from '../../api/home/home';
 import Category from '../../Component/Categoryfun/Category';
 import Brand from '../../Component/Brand/Brand';
 import Product from '../../Component/Product/Product';
-import ModalComp from '../../Component/ModalComp';
 
 
 function CustomTabPanel(props) {
@@ -69,7 +68,6 @@ export default function BasicTabs() {
     dispatch(getSubCategory());
     dispatch(getCotegory());
   }, [dispatch])
-
 
   return (
     <Box sx={{ width: '100%'}}>

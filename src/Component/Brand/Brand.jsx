@@ -21,7 +21,7 @@ const Brand = () => {
     
 return (
     <div>
-     <div className='flex gap-[10px]'>
+     <div className='flex gap-[10px] mx-[20px]'>
      <Button variant='contained'>add +</Button>
       <button><AutoFixHighOutlinedIcon/></button>
      </div>

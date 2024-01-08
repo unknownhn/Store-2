@@ -88,12 +88,6 @@ export default function Login() {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper relative left-[405px] mt-[25px] rounded-[20px] "
       >
-         ` {/* <SwiperSlide>
-              <img className="w-[20%]" src="src/assets/images/Снимок экрана 2023-11-27 163218.png" alt="" />  
-          </SwiperSlide>
-        <SwiperSlide>            <img className=" " src="src/assets/images/Снимок экрана 2023-11-27 162610.png" alt="" />  </SwiperSlide>
-        <SwiperSlide>    <img className=" " src="src/assets/images/Снимок экрана 2023-11-27 162804.png" alt="" /></SwiperSlide>
-        <SwiperSlid`e>  <img className="src/assets/images/Снимок экрана 2023-11-27 162946.png" alt="" /></SwiperSlide> */}
       </Swiper> 
           <div>
             <img  src="src/assets/images/frames.svg" alt="" />    
@@ -101,12 +95,6 @@ export default function Login() {
           <div>
         <div
         className=' border-[1px] p-[30px]'
-          // sx={{
-          //   marginTop: 8,
-          //   display: "flex",
-          //   flexDirection: "column",
-          //   alignItems: "center",
-          // }}
         >
           <Box
             component="form"
@@ -115,7 +103,8 @@ export default function Login() {
             sx={{ mt: 1 }}
           >
             <div className=' flex justify-center'>
-              <img src="src/assets/images/LOGO.png" alt="" />
+        <img className='w-[200px]'
+        src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg" alt="" />
             </div>
             <div className=' flex justify-center'>
             <input
@@ -134,10 +123,9 @@ export default function Login() {
             </div>
             <div className=' flex justify-center mt-[10px]'>
             <input
-            className=' w-[280px] p-[10px] border-[1px] '
+            className=' w-[280px] p-[10px] border-[1px]'
               margin="normal"
               required
-              // fullWidth
               name="password"
               label="Password"
               type="password"
@@ -146,10 +134,7 @@ export default function Login() {
               placeholder='Пароль'
             />
             </div>
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+            
             <div className=' text-white p-[5px] bg-blue-400 mt-[20px] flex justify-center rounded-[10px]'>
             <button
             className='  '
@@ -194,12 +179,4 @@ export default function Login() {
     </div>
   );
 
-
-
-
-
-
-
-
-  
 }
