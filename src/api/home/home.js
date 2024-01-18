@@ -66,7 +66,16 @@ export const getCotegory = createAsyncThunk(
   );
   
 
-  
+  export const getProductById = createAsyncThunk(
+    "home/getProductById",
+    async function (id) {
+      try {
+        const { data } = await axiosRequest.get(`/Product/get-product-by-id?id=${id}`);
+        // console.log(data.data);
+        return data.data;
+      } catch (error) {}
+    }
+  );
 
 
 

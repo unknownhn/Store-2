@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCotegory } from "../../api/home/home";
+import { getCotegory, getProductById } from "../../api/home/home";
 import { getCotegoryById } from "../../api/home/home";
 import { getProduct } from "../../api/home/home";
 import { getCart } from "../../api/home/home";
@@ -9,10 +9,11 @@ const home = createSlice({
     initialState: {
         cotegory: [],
         cotegoryById:[],
+        getProId:[],
         product:[],
         cart:[],
         newImg:'',
-        ModalPost:false
+        ModalPost:false,
     },
     reducers: {
         handleChange: (state, action) => {
@@ -61,7 +62,9 @@ const home = createSlice({
             state.loading.false;
         });
 
-
+        builder.addCase(getProductById.fulfilled, (state, action) => {
+            state.getProId= action.payload;
+        });
 
 
         

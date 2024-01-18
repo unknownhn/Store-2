@@ -1,17 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { addToCart } from '../api/home/home'
-import { useDispatch } from 'react-redux'
+import { addToCart, getProductById } from '../api/home/home'
+import { useDispatch,useSelector } from 'react-redux'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-const Sales = ({e, id, img, btn, title, cost, prev, btn2,color }) => {
+
+const Sales = ({e, idx, img, btn, title, cost, prev, btn2,color }) => {
 
 
 const dispatch = useDispatch()
 
+const proId=useSelector(({home})=>home.getProId)
 
+const [id, setId] = useState(null);
 
-  return (
+useEffect(() => {
+  dispatch(getProductById(id));
+},[dispatch,id]);
+
+  return (  
     <div  className='w-[200px] h-[361px]'>
       <div className="h-[139px]">
         <img className='h-[100%] object-cover' src={img} />

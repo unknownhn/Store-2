@@ -73,7 +73,7 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%'}}>
       <div className='border-b-2 border-[divider]'>
         <Tabs sx={{display:'flex',width:"40%",margin:"auto"}} value={value} onChange={handleChangeMui} aria-label="basic tabs example">
-        <Tab label="Brend" {...a11yProps(0)} />
+        <Tab label="Brand" {...a11yProps(0)} />
           <Tab label="Categories" {...a11yProps(1)} />
           <Tab label="Subcategories" {...a11yProps(2)} />
           <Tab label="Product" {...a11yProps(3)} />
@@ -124,7 +124,7 @@ export default function BasicTabs() {
           <Button onClick={()=>dispatch(handleChange({type:"open",value:false}))}>close</Button>
         </div>
        </Box>
-       </ModalComp>
+       </ModalComp> 
        {/* Modal edit */}
        <ModalComp open={openEditSub}>
        <Box>

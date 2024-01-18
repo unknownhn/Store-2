@@ -12,8 +12,10 @@ import ModalComp from '../ModalComp';
 
 const Brand = () => {
 
-    const dispatch = useDispatch()
-    const brands=useSelector(({cotegory})=>cotegory.brands)
+  const dispatch = useDispatch()
+  const open=useSelector(({cotegory})=>cotegory.open)
+  const brands=useSelector(({cotegory})=>cotegory.brands)
+  const text=useSelector(({cotegory})=>cotegory.text)
 
   useEffect(() => {
   dispatch(getBrand());
@@ -22,7 +24,7 @@ const Brand = () => {
 return (
     <div>
      <div className='flex gap-[10px] mx-[20px]'>
-     <Button variant='contained'>add +</Button>
+     <Button variant='contained' onClick={()=>dispatch(handleChange({type:"open",value:true}))}>add +</Button>
       <button><AutoFixHighOutlinedIcon/></button>
      </div>
       <div className='flex justify-between flex-wrap'> {
@@ -34,9 +36,18 @@ return (
               <button><DeleteOutlineOutlinedIcon/></button>
           </div>
         )
-       })
-        }</div>
+       })}</div>
+      <ModalComp open={open}>
 
+      <div>
+      <TextField value={text} onChange={(e)=>dispatch(handleChange({type:"text",value:e.target.value}))}/> 
+      </div>
+
+      <div className='flex gap-[20px] mt-[20px]'>
+      <Button>add</Button>
+      <Button onClick={()=>dispatch(handleChange({type:"open",value:false}))}>close</Button>
+      </div>
+      </ModalComp>
     </div>
   )
 }

@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { axiosRequest } from "../../utils/axiosRequest";
-import { getCotegory } from "../home/home";
+import { getCotegory, getProduct } from "../home/home";
+
 
 
 export const getSubCategory = createAsyncThunk(
@@ -106,4 +107,12 @@ export const getSubCategory = createAsyncThunk(
   );
 
 //=>//////////////////////Product
- 
+export const addProduct = createAsyncThunk(
+  "cotegory/addProduct",
+  async function (form) {
+    try {
+      const { data } = await axiosRequest.post(`Product/add-product`,form);
+      dispatch(getProduct());
+    } catch (error) {}
+  }
+);

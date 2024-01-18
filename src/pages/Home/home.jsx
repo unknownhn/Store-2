@@ -8,7 +8,7 @@ import '../../App.css'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import Cotegory from '../../Component/Cotegory';
 import Sales from '../../Component/Sales';
-import { getCotegory, getProduct } from '../../api/home/home';
+import { getCotegory, getProduct, getProductById } from '../../api/home/home';
 import { FreeMode } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { ModalPostTrue } from '../../reducers/home/home';
@@ -33,11 +33,13 @@ const Home = () => {
   let obj = useSelector((store) => store.home.newImg);
 
 
+const [id, setId] = useState(null);
 
   useEffect(() => {
     dispatch(getProduct())
     dispatch(getCotegory());
-  }, [dispatch])
+    dispatch(getProductById(id));
+  }, [dispatch,id])
 
   return (
     <div className='wrapper'>
@@ -98,7 +100,7 @@ const Home = () => {
 
           <div className="mt-[60px] ">
             <Swiper
-              slidesPerView={5}
+              slidesPerView={4}
               spaceBetween={140}
               freeMode={true}
               pagination={{
@@ -107,17 +109,17 @@ const Home = () => {
               modules={[FreeMode, Pagination]}
               className="mySwiper " x
             >
-              {/* {
+              {
                 product.map((e) => {
                   return (
-                    <div className=" p-[10px]" >
+                    <div className="p-[10px]" >
                       <SwiperSlide onClick={() => (dispatch(ModalPostTrue(e)), setModalElement({ e }))}  >
                         <Sales e={e} id={e.id} img={`${import.meta.env.VITE_APP_FILES_URL}${e.image}`} btn={'-36%'} cost={e.price} prev={'4564c'} title={e.productName} color={e.color} />
                         </SwiperSlide>
                     </div>
                   )
                 })
-              } */}
+              }
 
 
             </Swiper>
