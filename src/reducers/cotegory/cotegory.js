@@ -10,6 +10,7 @@ const cotegory = createSlice({
         brands: [],
         product: [],
         open: false,
+        open2: false,
         openCategoryadd: false,
         openCategoryedit: false,
         openEditSub:false,
